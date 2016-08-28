@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "711885763956",
+    "firebase_url": "https://friend-locater-ee537.firebaseio.com",
+    "project_id": "friend-locater-ee537",
+    "storage_bucket": "friend-locater-ee537.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711885763956:android:697cc33317289843",
+        "android_client_info": {
+          "package_name": "com.example.atulspc.friendlocater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711885763956-li35cju8ifegcof7kv7cdpt8sgtt2k4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmlnql5RgEC3WkhKjkHUv_VZfyjbjOcgs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

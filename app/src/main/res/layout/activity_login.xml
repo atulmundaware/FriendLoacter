@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.atulspc.friendlocater.LoginActivity">
+    tools:context="com.example.atulspc.friendlocater.LoginActivity"
+    android:nestedScrollingEnabled="true">
 
     <!-- Login progress -->
     <ProgressBar
@@ -88,7 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Register"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="Register"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

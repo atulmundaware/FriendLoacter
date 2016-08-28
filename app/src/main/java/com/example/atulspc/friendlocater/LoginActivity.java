@@ -3,6 +3,7 @@ package com.example.atulspc.friendlocater;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -27,7 +28,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,25 +74,80 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    Button register;
+    TextView username,password;
+    ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
+
+    Firebase ref = new Firebase("https://friend-locater.firebaseio.com/");
+
+
 
     @Override
     protected void onStart() {
         super.onStart();
 
 
-
+            ref.addAuthStateListener(new Firebase.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(AuthData authData) {
+                    if (authData != null) {
+                        // user is logged in
+                    } else {
+                        // user is not logged in
+                    }
+                }
+            });
 
 
 
     }
 
+    public void Register()
+    {
+        username=(TextView)findViewById(R.id.email);
+        password=(TextView)findViewById(R.id.password);
+
+        if (TextUtils.isEmpty(username.toString())&&TextUtils.isEmpty(password.toString()))
+        {
+
+            Toast.makeText(this,"Please Enter username and password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressDialog.setMessage("Registering user Please Wait");
+        progressDialog.show();
+
+
+        firebaseAuth.createUserWithEmailAndPassword(username.toString(),password.toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(LoginActivity.this,"Registered Successfully",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this,"Could not Resgister,Please try again",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        progressDialog=new ProgressDialog(this);
+        firebaseAuth.getInstance();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
